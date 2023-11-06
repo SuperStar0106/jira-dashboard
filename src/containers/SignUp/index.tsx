@@ -1,6 +1,6 @@
 import React from 'react'
 import { MainView } from '../../components/view'
 
-export const MainContainer: React.FC = () => {
+export const SignUpContainer: React.FC = () => {
   return <MainView />
 }

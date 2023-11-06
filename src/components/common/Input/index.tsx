@@ -7,11 +7,17 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material'
-import { VisibilityOff, Visibility } from '@mui/icons-material'
+import { NoEncryptionOutlined } from '@mui/icons-material'
 
-type InputComponentProps = InputProps
+type InputComponentProps = InputProps & {
+  icon?: React.ReactNode
+  placeholder?: string
+  isPassword?: boolean
+  type?: string
+}
 
-export const InputComponent: React.FC<InputComponentProps> = () => {
+export const InputComponent: React.FC<InputComponentProps> = (props) => {
+  const { icon, placeholder, isPassword, type } = props
   const [showPassword, setShowPassword] = React.useState(false)
 
   const handleClickShowPassword = (): void => {
@@ -25,32 +31,47 @@ export const InputComponent: React.FC<InputComponentProps> = () => {
   }
 
   return (
-    <InputComponentStyle>
+    <InputComponentStyle
+      type={type}
+      style={{ display: 'flex', justifyContent: 'center' }}
+    >
       <FormControl
         sx={{ m: 1, width: '100%' }}
         variant="outlined"
         className="input-form-control"
       >
         <OutlinedInput
-          id="outlined-adornment-weight"
+          id="outlined-adornment-password"
           endAdornment={<InputAdornment position="end">kg</InputAdornment>}
           aria-describedby="outlined-weight-helper-text"
           inputProps={{
             'aria-label': 'weight',
           }}
           className="text"
-          placeholder="Password"
+          placeholder={placeholder}
+          type={
+            isPassword === undefined ||
+            (isPassword != null && isPassword && showPassword)
+              ? 'text'
+              : 'password'
+          }
           startAdornment={
             <InputAdornment position="end">
-              <IconButton
-                sx={{ color: '#B8B8B8' }}
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="start"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
+              {icon != null ? (
+                <IconButton
+                  sx={{ color: '#B8B8B8' }}
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="start"
+                >
+                  {isPassword == null || (isPassword && !showPassword) ? (
+                    icon
+                  ) : (
+                    <NoEncryptionOutlined />
+                  )}
+                </IconButton>
+              ) : null}
             </InputAdornment>
           }
         />

@@ -10,6 +10,9 @@ export const ButtonComponentStyle = styled('button')<ButtonComponentStyleProps>(
     return {
       fontFamily: customTheme.fonts.mainFont,
       fontWeight: customTheme.fontWeights.light,
+      width: '100%',
+      height: '100%',
+
       backgroundColor:
         type === 'submit'
           ? disabled != null && disabled
@@ -35,12 +38,13 @@ export const ButtonComponentStyle = styled('button')<ButtonComponentStyleProps>(
                 : customTheme.colors.activeCancelButtonBorderColor
             }`,
       fontSize: '16px',
-      borderRadius: '10px',
+      borderRadius: type === 'submit' ? '100px' : '10px',
       borderWidth: '0px',
-      cursor:
-        disabled != null && disabled
-          ? 'not-allowed !important'
-          : 'pointer !important',
+      cursor: 'pointer !important',
+      // cursor: 'pointer !important',
+      // disabled != null && disabled
+      //   ? 'not-allowed !important'
+      //   : 'pointer !important',
       boxSizing: 'border-box',
       textAlign: 'center',
 
@@ -48,10 +52,10 @@ export const ButtonComponentStyle = styled('button')<ButtonComponentStyleProps>(
       transitionDuration: '1s',
 
       '&:hover': {
-        backgroundColor:
-          disabled != null && disabled
-            ? customTheme.colors.primary60
-            : customTheme.colors.primary20,
+        backgroundColor: 'red',
+        // disabled != null && disabled
+        //   ? customTheme.colors.primary60
+        //   : customTheme.colors.primary20,
       },
     }
   }

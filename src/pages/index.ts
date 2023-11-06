@@ -1,1 +1,5 @@
-export * from './Main'
+export * from './SignUp'
+export * from './SignIn'
+export * from './ForgetPwd'
+export * from './Verification'
+export * from './Success'

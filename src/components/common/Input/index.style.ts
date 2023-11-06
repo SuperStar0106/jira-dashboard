@@ -1,26 +1,31 @@
 import { styled, type StyledComponentProps } from '@mui/material'
 import { type CustomTheme } from '../../../styles/type'
 
-type InputComponentStyleProps = StyledComponentProps
+type InputComponentStyleProps = StyledComponentProps & {
+  type?: string
+}
 
 export const InputComponentStyle = styled('div')<InputComponentStyleProps>(({
   theme,
+  type,
 }) => {
   const customTheme = theme as CustomTheme
 
   return {
     display: 'flex',
     width: '100%',
+    height: '100%',
 
     '.text': {
       borderRadius: '15px',
-      fontSize: '14px',
-      color: customTheme.colors.primaryLight00,
+      fontSize: type === 'digital' ? '40px' : '14px',
+      color: type === 'digital' ? 'black' : customTheme.colors.primaryLight00,
       fontFamily: customTheme.fonts.mainFont,
       fontStyle: 'normal',
       fontWeight: '400',
       lineHeight: '28px',
       letterSpacing: '0.5px',
+      height: '100%',
     },
 
     '.label': {
