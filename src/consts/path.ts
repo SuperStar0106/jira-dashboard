@@ -1,0 +1,6 @@
+export const SIGNUP = '/signup'
+export const SIGNIN = '/signin'
+export const FORGETPWD = '/forgetpwd'
+export const VERIFICATION = '/verification'
+export const SUCCESS = '/success'
+export const DASHBOARD = '/dashboard'
