@@ -17,7 +17,7 @@ export const InputComponentStyle = styled('div')<InputComponentStyleProps>(({
     height: '100%',
 
     '.text': {
-      borderRadius: '15px',
+      borderRadius: type === 'end_icon_input' ? '100px' : '15px',
       fontSize: type === 'digital' ? '40px' : '14px',
       color: type === 'digital' ? 'black' : customTheme.colors.primaryLight00,
       fontFamily: customTheme.fonts.mainFont,

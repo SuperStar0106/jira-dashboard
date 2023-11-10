@@ -8,6 +8,7 @@ import {
   ForgetPwdPage,
   VerificationPage,
   SuccessPage,
+  DashboardPage,
 } from './pages'
 import { PATH } from './consts'
 
@@ -24,7 +25,7 @@ export const App: React.FC = () => {
             element={<VerificationPage />}
           ></Route>
           <Route path={PATH.SUCCESS} element={<SuccessPage />}></Route>
-          <Route path={PATH.DASHBOARD} element={<h1>DashBoard</h1>}></Route>
+          <Route path={PATH.DASHBOARD} element={<DashboardPage />}></Route>
           <Route path="*" element={<Navigate to={PATH.SIGNUP} />}></Route>
         </Routes>
       </BrowserRouter>

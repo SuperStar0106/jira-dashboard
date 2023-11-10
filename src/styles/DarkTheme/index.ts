@@ -17,6 +17,10 @@ const themeColors = {
     primaryLight00: '#C5C5C5',
 
     primaryGray00: '#A0AAB4',
+    primaryGray10: '#F3F4F8',
+    primaryGray20: '#5B6871',
+
+    primaryBlue00: '#6772FE',
 
     successLight: '#E3F2E0',
     successMedium: '#8DC881',
