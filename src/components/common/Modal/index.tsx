@@ -149,8 +149,8 @@ export const ModalComponent: React.FC<ModalComponentProps> = (props) => {
               borderRadius: '10px',
               textTransform: 'none',
               marginRight: '17px',
-              paddingLeft: '5px',
-              paddingRight: '5px',
+              paddingLeft: '10px',
+              paddingRight: '10px',
               '&:hover': {
                 backgroundColor: '#575DFB',
               },
