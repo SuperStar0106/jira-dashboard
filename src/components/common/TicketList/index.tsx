@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TicketListComponentStyle } from './index.style'
 import { Droppable, Draggable } from '@hello-pangea/dnd'
+import { ModalComponent } from '../Modal'
 import { ButtonComponent } from '../Button'
 import {
   Box,
@@ -91,6 +92,16 @@ export const TicketListComponent: React.FC<TicketListComponentProps> = ({
   tickets,
   droppableId,
 }) => {
+  const [open, setOpen] = useState<boolean>(false)
+
+  const handleClickOpen = (): void => {
+    setOpen(true)
+  }
+
+  const handleClose = (): void => {
+    setOpen(false)
+  }
+
   return (
     <TicketListComponentStyle>
       <Box className="progress-box">
@@ -98,7 +109,11 @@ export const TicketListComponent: React.FC<TicketListComponentProps> = ({
           <CardHeader
             avatar={<FiberManualRecord sx={{ width: '10px' }} />}
             action={
-              <IconButton className="progress-icon-btn" aria-label="add">
+              <IconButton
+                className="progress-icon-btn"
+                onClick={handleClickOpen}
+                aria-label="add"
+              >
                 <AddOutlined className="progress-icon" />
               </IconButton>
             }
@@ -106,6 +121,11 @@ export const TicketListComponent: React.FC<TicketListComponentProps> = ({
             sx={{ width: '100%' }}
           ></CardHeader>
         </Card>
+        <ModalComponent
+          isOpen={open}
+          modalTitle="Task"
+          handleClose={handleClose}
+        />
       </Box>
       <Droppable droppableId={droppableId}>
         {(provided) => (
