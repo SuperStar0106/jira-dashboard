@@ -61,9 +61,12 @@ export const TicketListComponentStyle = styled(
     '.ticket-card': {
       color: '#BDBDBD',
       width: '235px',
-      // height: '54px',
       backgroundColor: customTheme.colors.white,
       borderRadius: '10px',
+
+      '&:hover': {
+        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+      },
 
       '& .MuiCardContent-root': {
         paddingLeft: '14px',

@@ -102,7 +102,7 @@ export const TicketListComponent: React.FC<TicketListComponentProps> = ({
                 <AddOutlined className="progress-icon" />
               </IconButton>
             }
-            title="Backlog (20)"
+            title={progressTitle}
             sx={{ width: '100%' }}
           ></CardHeader>
         </Card>
