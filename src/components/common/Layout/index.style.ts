@@ -27,7 +27,7 @@ export const ContentSection = styled('div')(({ theme }) => {
     marginBottom: '60px',
     marginLeft: '82px',
     paddingTop: '35px',
-    height: 'calc(100% - 72px)',
+    height: 'calc(100% - 110px)',
     overflow: 'auto',
   }
 })

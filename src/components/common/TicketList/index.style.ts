@@ -124,5 +124,21 @@ export const TicketListComponentStyle = styled(
       justifyContent: 'center',
       alignItems: 'center',
     },
+
+    ul: {
+      listStyle: 'none',
+      paddingLeft: '5px',
+    },
+    '.box': {
+      width: '200px',
+      height: '50px',
+      marginBottom: '5px',
+    },
+    '.red': {
+      background: 'red',
+    },
+    '.green': {
+      background: 'green',
+    },
   }
 })

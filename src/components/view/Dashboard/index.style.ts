@@ -13,6 +13,7 @@ export const DashboardViewStyle = styled('div')<DashboardViewStyleProps>(({
     display: 'flex',
     width: '100%',
     height: '100%',
+    userSelect: 'none',
 
     '.url-text': {
       color: customTheme.colors.primaryGray20,
