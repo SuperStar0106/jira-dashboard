@@ -9,7 +9,7 @@ export const TicketListComponentStyle = styled(
   const customTheme = theme as CustomTheme
 
   return {
-    display: 'flex',
+    display: 'block',
     width: '100%',
     height: '100%',
 
@@ -21,8 +21,6 @@ export const TicketListComponentStyle = styled(
       height: '54px',
       backgroundColor: customTheme.colors.white,
       borderRadius: '10px',
-      paddingLeft: '5px',
-      paddingRight: '10px',
 
       '& .MuiCardHeader-title': {
         fontFamily: 'Roboto',
@@ -44,6 +42,7 @@ export const TicketListComponentStyle = styled(
 
       '& .css-sgoict-MuiCardHeader-action': {
         marginTop: '0px',
+        marginRight: '0px',
       },
     },
 
@@ -53,6 +52,71 @@ export const TicketListComponentStyle = styled(
 
     '.progress-icon': {
       color: customTheme.colors.primaryBlue00,
+    },
+
+    '.ticket-box': {
+      marginTop: '10px',
+    },
+
+    '.ticket-card': {
+      color: '#BDBDBD',
+      width: '235px',
+      // height: '54px',
+      backgroundColor: customTheme.colors.white,
+      borderRadius: '10px',
+
+      '& .MuiCardContent-root': {
+        paddingLeft: '14px',
+        paddingRight: '14px',
+        paddingTop: '16px',
+        paddingBottom: '16px',
+      },
+    },
+
+    '.ticket-type-box': {},
+
+    '.ticket-type-btn': {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 'auto',
+      paddingLeft: '10px',
+      paddingRight: '10px',
+      height: '22px',
+      fontFamily: 'DM Sans',
+      fontSize: '12px',
+      fontStyle: 'normal',
+      fontWeight: '500',
+      lineHeight: 'normal',
+      borderRadius: '4px',
+    },
+
+    '.ticket-img-box': {
+      width: '100%',
+      marginTop: '15px',
+      height: '110px',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      borderRadius: '10px',
+    },
+
+    '.ticket-heading-title': {
+      color: '#232360',
+      fontFamily: 'DM Sans',
+      fontSize: '13px',
+      fontStyle: 'normal',
+      fontWeight: '500',
+      lineHeight: 'normal',
+    },
+
+    '.ticket-description': {
+      color: '#768396',
+      fontFamily: 'DM Sans',
+      fontSize: '12px',
+      fontStyle: 'normal',
+      fontWeight: '500',
+      lineHeight: 'normal',
     },
 
     '.justify-content-center': {
