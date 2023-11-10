@@ -42,7 +42,7 @@ export const InputComponent: React.FC<InputComponentProps> = (props) => {
       >
         <OutlinedInput
           id="outlined-adornment-password"
-          endAdornment={<InputAdornment position="end">kg</InputAdornment>}
+          endAdornment={type === 'end_icon_input' && icon}
           aria-describedby="outlined-weight-helper-text"
           inputProps={{
             'aria-label': 'weight',
@@ -56,23 +56,25 @@ export const InputComponent: React.FC<InputComponentProps> = (props) => {
               : 'password'
           }
           startAdornment={
-            <InputAdornment position="end">
-              {icon != null ? (
-                <IconButton
-                  sx={{ color: '#B8B8B8' }}
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="start"
-                >
-                  {isPassword == null || (isPassword && !showPassword) ? (
-                    icon
-                  ) : (
-                    <NoEncryptionOutlined />
-                  )}
-                </IconButton>
-              ) : null}
-            </InputAdornment>
+            type !== 'end_icon_input' && (
+              <InputAdornment position="end">
+                {icon != null ? (
+                  <IconButton
+                    sx={{ color: '#B8B8B8' }}
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="start"
+                  >
+                    {isPassword == null || (isPassword && !showPassword) ? (
+                      icon
+                    ) : (
+                      <NoEncryptionOutlined />
+                    )}
+                  </IconButton>
+                ) : null}
+              </InputAdornment>
+            )
           }
         />
       </FormControl>

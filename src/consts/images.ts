@@ -5,6 +5,8 @@ import logoImg from '../assets/images/main/logo.svg'
 import googleImg from '../assets/images/main/google-logo.svg'
 import appleImg from '../assets/images/main/apple-logo.svg'
 
+import avatarImg from '../assets/images/dashboard/user_avatar.svg'
+
 export const Main = {
   backImg,
   dotImg,
@@ -12,4 +14,8 @@ export const Main = {
   logoImg,
   googleImg,
   appleImg,
+}
+
+export const DashBoard = {
+  avatarImg,
 }
