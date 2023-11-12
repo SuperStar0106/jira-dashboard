@@ -20,10 +20,10 @@ export const LayoutComponent: React.FC<LayoutComponentProps> = ({
 }
 
 // eslint-disable-next-line react/display-name
-export const WithLayout = (Component: React.FC) => () => {
+export const WithLayout = (Component: React.FC<any>) => (props: any) => {
   return (
     <LayoutComponent>
-      <Component />
+      <Component {...props} />
     </LayoutComponent>
   )
 }

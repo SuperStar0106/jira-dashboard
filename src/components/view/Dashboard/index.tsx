@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box, type BoxProps, Container, Typography } from '@mui/material'
 import { DashboardViewStyle } from './index.style'
 import { WithLayout, TicketListComponent } from '../../common'
 import { DragDropContext } from '@hello-pangea/dnd'
+import {
+  type BoardReceive,
+  type ListReceive,
+  type ItemReceive,
+} from '../../../types'
 
-type DashboardViewProps = BoxProps
+type DashboardViewProps = BoxProps & {
+  boards: BoardReceive
+  lists: ListReceive
+  items: ItemReceive
+}
 
 type Tickets = Record<string, string[]>
 
@@ -14,7 +23,13 @@ const initialTickets: Tickets = {
   done: ['Ticket 5', 'Ticket 6'],
 }
 
-const DashboardComponent: React.FC<DashboardViewProps> = () => {
+const DashboardComponent: React.FC<DashboardViewProps> = (props) => {
+  const { lists, items } = props
+
+  useEffect(() => {
+    console.log('items in dashboard: ', Object.values(items.byId))
+  }, [])
+
   const [tickets, setTickets] = useState(initialTickets)
 
   const handleOnDragEnd = (result: any): void => {
@@ -48,16 +63,22 @@ const DashboardComponent: React.FC<DashboardViewProps> = () => {
         </Box>
         <Box sx={{ display: 'flex', gap: '15px' }}>
           <DragDropContext onDragEnd={handleOnDragEnd}>
-            {Object.entries(tickets).map(([id, tickets]) => (
-              <Box sx={{ marginTop: '78px' }} key={id}>
-                <TicketListComponent
-                  key={id}
-                  progressTitle="Backlog"
-                  tickets={tickets}
-                  droppableId={id}
-                />
-              </Box>
-            ))}
+            {Object.entries(lists.byId).map(([id, tickets]) => {
+              const filteredItems = Object.values(items.byId).filter((item) =>
+                tickets.items.includes(item.id)
+              )
+
+              return (
+                <Box sx={{ marginTop: '78px' }} key={id}>
+                  <TicketListComponent
+                    key={id}
+                    progressTitle={tickets.title}
+                    tickets={filteredItems}
+                    droppableId={id}
+                  />
+                </Box>
+              )
+            })}
           </DragDropContext>
         </Box>
       </Container>
@@ -65,4 +86,5 @@ const DashboardComponent: React.FC<DashboardViewProps> = () => {
   )
 }
 
-export const DashboardView: React.FC = WithLayout(DashboardComponent)
+export const DashboardView: React.FC<DashboardViewProps> =
+  WithLayout(DashboardComponent)

@@ -3,6 +3,7 @@ import { TicketListComponentStyle } from './index.style'
 import { Droppable, Draggable } from '@hello-pangea/dnd'
 import { ModalComponent } from '../Modal'
 import { ButtonComponent } from '../Button'
+import { type Item } from '../../../types'
 import {
   Box,
   Card,
@@ -16,18 +17,20 @@ import { AddOutlined, FiberManualRecord } from '@mui/icons-material'
 import ticketImg from '../../../assets/images/dashboard/ticket_imgs/img1.jpg'
 interface TicketListComponentProps {
   progressTitle: string
-  tickets: string[]
+  tickets: Item[]
   droppableId: string
 }
 
 interface TicketComponentProps {
-  ticketTitle: string
   index: number
+  ticketTitle: string
+  ticketContent: string
 }
 
 export const TicketComponent: React.FC<TicketComponentProps> = ({
-  ticketTitle,
   index,
+  ticketTitle,
+  ticketContent,
 }) => {
   return (
     <Draggable draggableId={ticketTitle} index={index}>
@@ -57,13 +60,13 @@ export const TicketComponent: React.FC<TicketComponentProps> = ({
                     className="ticket-heading-title"
                     sx={{ marginTop: '15px' }}
                   >
-                    Heading title
+                    {ticketTitle}
                   </Typography>
                   <Typography
                     className="ticket-description"
                     sx={{ marginTop: '7px' }}
                   >
-                    Lorem ipsum sit dolor amet ipsum
+                    {ticketContent}
                   </Typography>
                 </Box>
                 <Box className="ticket-type-box">
@@ -136,9 +139,10 @@ export const TicketListComponent: React.FC<TicketListComponentProps> = ({
           >
             {tickets.map((ticket, index) => (
               <TicketComponent
-                ticketTitle={ticket}
                 index={index}
-                key={ticket}
+                key={index}
+                ticketTitle={ticket.content}
+                ticketContent={ticket.content}
               />
             ))}
             {provided.placeholder}
