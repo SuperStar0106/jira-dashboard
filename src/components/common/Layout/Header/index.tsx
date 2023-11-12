@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { HeaderSectionStyle } from './index.style'
 import { ButtonComponent } from '../../Button'
 import { InputComponent } from '../../Input'
@@ -22,7 +23,7 @@ import {
   Notifications,
   SearchOutlined,
 } from '@mui/icons-material'
-import { IMAGE } from '../../../../consts'
+import { IMAGE, PATH } from '../../../../consts'
 
 interface FadeMenuComponentProps {
   activeButton: string
@@ -106,6 +107,7 @@ export const FadeMenuComponent: React.FC<FadeMenuComponentProps> = (props) => {
 
 export const HeaderSection: React.FC = () => {
   const [activeButton, setActiveButton] = useState<string>('')
+  const navigate = useNavigate()
 
   return (
     <HeaderSectionStyle>
@@ -159,7 +161,13 @@ export const HeaderSection: React.FC = () => {
           />
         </Box>
         <Box className="justify-content-center">
-          <ButtonComponent type="submit" className="create_btn">
+          <ButtonComponent
+            type="submit"
+            className="create_btn"
+            onClick={() => {
+              navigate(PATH.TASKINSERT)
+            }}
+          >
             + Create New Task
           </ButtonComponent>
         </Box>

@@ -9,6 +9,8 @@ import {
   VerificationPage,
   SuccessPage,
   DashboardPage,
+  TaskInsertPage,
+  ItemInsertPage,
 } from './pages'
 import { PATH } from './consts'
 
@@ -26,6 +28,8 @@ export const App: React.FC = () => {
           ></Route>
           <Route path={PATH.SUCCESS} element={<SuccessPage />}></Route>
           <Route path={PATH.DASHBOARD} element={<DashboardPage />}></Route>
+          <Route path={PATH.TASKINSERT} element={<TaskInsertPage />}></Route>
+          <Route path={PATH.ITEMINSERT} element={<ItemInsertPage />}></Route>
           <Route path="*" element={<Navigate to={PATH.SIGNUP} />}></Route>
         </Routes>
       </BrowserRouter>
