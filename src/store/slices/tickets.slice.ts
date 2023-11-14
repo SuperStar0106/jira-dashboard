@@ -1,8 +1,13 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { type Tickets } from '../types'
-import { type Ticket } from '../../types'
+import { type Ticket } from '../../models'
 
 const initialState: Ticket = {
+  newIds: {
+    newBoardId: '',
+    newListId: '',
+    newItemId: '',
+  },
   boards: {
     byId: {
       board1: {
@@ -160,6 +165,74 @@ const ticketsSlice = createSlice({
       state: Ticket,
       action: PayloadAction<Tickets.GetListsRequestPayload>
     ) {},
+    addBoard(
+      state: Ticket,
+      action: PayloadAction<Tickets.AddBoardRequestPayload>
+    ) {
+      const { title, lists } = action.payload
+
+      const newBoardId = `board${state.boards.allIds.length + 1}`
+      const newBoard = {
+        id: newBoardId,
+        title,
+        lists,
+      }
+
+      return {
+        ...state,
+        newIds: {
+          ...state.newIds,
+          newBoardId,
+        },
+        boards: {
+          byId: {
+            ...state.boards.byId,
+            [newBoardId]: newBoard,
+          },
+          allIds: [...state.boards.allIds, newBoardId],
+        },
+      }
+    },
+    addList(
+      state: Ticket,
+      action: PayloadAction<Tickets.AddListRequestPayload>
+    ) {
+      const { title, items, boardId } = action.payload
+
+      const newListId = `list${state.lists.allIds.length + 1}`
+      const newList = {
+        id: newListId,
+        title,
+        items,
+      }
+
+      const updateBoard = {
+        ...state.boards.byId[boardId],
+        lists: [...state.boards.byId[boardId].lists, newListId],
+      }
+
+      return {
+        ...state,
+        newIds: {
+          ...state.newIds,
+          newListId,
+        },
+        lists: {
+          byId: {
+            ...state.lists.byId,
+            [newListId]: newList,
+          },
+          allIds: [...state.lists.allIds, newListId],
+        },
+        boards: {
+          ...state.boards,
+          byId: {
+            ...state.boards.byId,
+            [boardId]: updateBoard,
+          },
+        },
+      }
+    },
   },
 })
 

@@ -28,7 +28,14 @@ export interface BoardReceive {
   allIds: string[]
 }
 
+export interface newIds {
+  newBoardId: string
+  newListId: string
+  newItemId: string
+}
+
 export interface Ticket {
+  newIds: newIds
   boards: BoardReceive
   lists: ListReceive
   items: ItemReceive

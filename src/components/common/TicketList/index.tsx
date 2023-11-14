@@ -3,7 +3,7 @@ import { TicketListComponentStyle } from './index.style'
 import { Droppable, Draggable } from '@hello-pangea/dnd'
 import { ModalComponent } from '../Modal'
 import { ButtonComponent } from '../Button'
-import { type Item } from '../../../types'
+import { type Item } from '../../../models'
 import {
   Box,
   Card,

@@ -31,9 +31,7 @@ export const HeaderSectionStyle = styled('div')<HeaderSectionStyleProps>(({
     '.create_btn': {
       borderRadius: '10px',
       fontSize: '14px',
-      paddingLeft: '14px',
-      paddingRight: '14px',
-      maxHeight: '43px',
+      padding: '14px',
     },
 
     '.badge': {

@@ -73,7 +73,12 @@ export const VerificationView: React.FC<VerificationViewProps> = () => {
                     </Typography>
                   </Grid>
                   <Grid className="button-grid" item xs={12}>
-                    <ButtonComponent type="submit">Continue</ButtonComponent>
+                    <ButtonComponent
+                      type="submit"
+                      className="row-gap border-radius-100"
+                    >
+                      Continue
+                    </ButtonComponent>
                   </Grid>
                 </Grid>
                 <Grid className="hr-wrapper" item xs={12}>

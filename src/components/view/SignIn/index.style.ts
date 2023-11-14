@@ -192,5 +192,14 @@ export const SignInViewStyle = styled('div')<SignInViewStyleProps>(({
       color: '#666',
       justifyContent: 'space-between',
     },
+
+    '.row-gap': {
+      width: '100%',
+      height: '100%',
+    },
+
+    '.border-radius-100': {
+      borderRadius: '100px',
+    },
   }
 })

@@ -25,18 +25,18 @@ export const TaskInsertViewStyle = styled('div')<TaskInsertViewStyleProps>(({
     },
 
     '.ticket-card': {
-      marginTop: '32px',
       minWidth: '235px',
       borderRadius: '12px',
       backgroundColor: customTheme.colors.white,
     },
 
+    '.ticket-box': {
+      marginTop: '32px',
+    },
+
     '.add-list-btn': {
       color: 'white',
-      backgroundColor: '#575DFB',
-      padding: '10px',
-      width: 'auto',
-      marginLeft: '10px',
+      padding: '14px',
     },
 
     '.label-txt': {

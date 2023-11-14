@@ -33,6 +33,7 @@ interface FadeMenuComponentProps {
 export const FadeMenuComponent: React.FC<FadeMenuComponentProps> = (props) => {
   const { activeButton, setActiveButton } = props
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const navigate = useNavigate()
 
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget)
@@ -94,7 +95,7 @@ export const FadeMenuComponent: React.FC<FadeMenuComponentProps> = (props) => {
         </MenuItem>
         <MenuItem
           onClick={(e) => {
-            handleClose()
+            navigate(PATH.TASKINSERT)
           }}
           key="2"
         >

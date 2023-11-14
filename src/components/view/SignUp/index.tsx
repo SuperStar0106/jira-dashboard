@@ -62,7 +62,12 @@ export const MainView: React.FC<MainViewProps> = () => {
                     />
                   </Grid>
                   <Grid className="button-grid" item xs={12}>
-                    <ButtonComponent type="submit">Sign Up</ButtonComponent>
+                    <ButtonComponent
+                      type="submit"
+                      className="row-gap border-radius-100"
+                    >
+                      Sign Up
+                    </ButtonComponent>
                   </Grid>
                   <Grid className="hr-wrapper" item xs={12}>
                     <hr className="hr-left" />

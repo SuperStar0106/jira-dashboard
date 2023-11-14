@@ -198,9 +198,13 @@ export const SuccessViewStyle = styled('div')<SuccessViewStyleProps>(({
       borderColor: 'black',
     },
 
-    // '.tick-icon': {
-    //   width: '122px',
-    //   height: '122px',
-    // }
+    '.row-gap': {
+      width: '100%',
+      height: '100%',
+    },
+
+    '.border-radius-100': {
+      borderRadius: '100px',
+    },
   }
 })

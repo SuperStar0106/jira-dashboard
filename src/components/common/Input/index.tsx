@@ -1,4 +1,5 @@
 import React from 'react'
+import { type UseFormRegister, type RegisterOptions } from 'react-hook-form'
 import { InputComponentStyle } from './index.style'
 import {
   type InputProps,
@@ -14,10 +15,21 @@ type InputComponentProps = InputProps & {
   placeholder?: string
   isPassword?: boolean
   type?: string
+  register?: UseFormRegister<any>
+  options?: RegisterOptions
 }
 
 export const InputComponent: React.FC<InputComponentProps> = (props) => {
-  const { icon, placeholder, isPassword, type } = props
+  const {
+    icon,
+    placeholder,
+    isPassword,
+    type,
+    name: fieldName,
+    options,
+    register,
+    ...rest
+  } = props
   const [showPassword, setShowPassword] = React.useState(false)
 
   const handleClickShowPassword = (): void => {
@@ -47,6 +59,9 @@ export const InputComponent: React.FC<InputComponentProps> = (props) => {
           inputProps={{
             'aria-label': 'weight',
           }}
+          {...rest}
+          // eslint-disable-next-line @typescript-eslint/prefer-optional-chain, @typescript-eslint/no-non-null-assertion, @typescript-eslint/strict-boolean-expressions
+          {...(register && register(fieldName!, options))}
           className="text"
           placeholder={placeholder}
           type={
@@ -56,6 +71,7 @@ export const InputComponent: React.FC<InputComponentProps> = (props) => {
               : 'password'
           }
           startAdornment={
+            icon != null &&
             type !== 'end_icon_input' && (
               <InputAdornment position="end">
                 {icon != null ? (

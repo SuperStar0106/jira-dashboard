@@ -7,7 +7,7 @@ import {
   type BoardReceive,
   type ListReceive,
   type ItemReceive,
-} from '../../../types'
+} from '../../../models'
 
 type DashboardViewProps = BoxProps & {
   boards: BoardReceive

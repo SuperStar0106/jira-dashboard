@@ -38,7 +38,12 @@ export const ForgetPwdView: React.FC<ForgetPwdViewProps> = () => {
                     />
                   </Grid>
                   <Grid className="button-grid" item xs={12}>
-                    <ButtonComponent type="submit">Continue</ButtonComponent>
+                    <ButtonComponent
+                      type="submit"
+                      className="row-gap border-radius-100"
+                    >
+                      Continue
+                    </ButtonComponent>
                   </Grid>
                 </Grid>
               </CardComponent>

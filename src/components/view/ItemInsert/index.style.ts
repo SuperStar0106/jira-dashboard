@@ -25,10 +25,13 @@ export const ItemInsertViewStyle = styled('div')<ItemInsertViewStyleProps>(({
     },
 
     '.ticket-card': {
-      marginTop: '32px',
       minWidth: '235px',
       borderRadius: '12px',
       backgroundColor: customTheme.colors.white,
+    },
+
+    '.ticket-box': {
+      marginTop: '32px',
     },
 
     '.add-list-btn': {

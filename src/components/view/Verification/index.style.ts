@@ -196,6 +196,15 @@ export const VerificationViewStyle = styled('div')<VerificationViewStyleProps>(
         color: 'red',
         borderColor: 'black',
       },
+
+      '.row-gap': {
+        width: '100%',
+        height: '100%',
+      },
+
+      '.border-radius-100': {
+        borderRadius: '100px',
+      },
     }
   }
 )

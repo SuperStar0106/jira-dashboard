@@ -61,7 +61,12 @@ export const SignInView: React.FC<SignInViewProps> = () => {
                     <Typography>Forgot password?</Typography>
                   </Grid>
                   <Grid className="button-grid" item xs={12}>
-                    <ButtonComponent type="submit">Sign In</ButtonComponent>
+                    <ButtonComponent
+                      type="submit"
+                      className="row-gap border-radius-100"
+                    >
+                      Sign In
+                    </ButtonComponent>
                   </Grid>
                   <Grid className="hr-wrapper" item xs={12}>
                     <hr className="hr-left" />

@@ -184,5 +184,14 @@ export const MainViewStyle = styled('div')<MainViewStyleProps>(({ theme }) => {
     '.show-top': {
       zIndex: '100',
     },
+
+    '.row-gap': {
+      width: '100%',
+      height: '100%',
+    },
+
+    '.border-radius-100': {
+      borderRadius: '100px',
+    },
   }
 })
