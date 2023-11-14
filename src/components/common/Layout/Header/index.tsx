@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { type RootState } from '../../../../store'
 import { useNavigate } from 'react-router-dom'
 import { HeaderSectionStyle } from './index.style'
-import { ButtonComponent } from '../../Button'
-import { InputComponent } from '../../Input'
 import {
   Box,
   Button,
@@ -14,6 +14,8 @@ import {
   Avatar,
   Badge,
 } from '@mui/material'
+import { ButtonComponent } from '../../Button'
+import { InputComponent } from '../../Input'
 import {
   ExpandMoreOutlined,
   NotesOutlined,
@@ -34,6 +36,7 @@ export const FadeMenuComponent: React.FC<FadeMenuComponentProps> = (props) => {
   const { activeButton, setActiveButton } = props
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const navigate = useNavigate()
+  const { boards } = useSelector((state: RootState) => state.tickets)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget)
@@ -82,7 +85,7 @@ export const FadeMenuComponent: React.FC<FadeMenuComponentProps> = (props) => {
           },
         }}
       >
-        <MenuItem
+        {/* <MenuItem
           onClick={(e) => {
             handleClose()
           }}
@@ -92,7 +95,22 @@ export const FadeMenuComponent: React.FC<FadeMenuComponentProps> = (props) => {
           <Typography variant="body2" color="#252C32">
             <BorderColorOutlined />
           </Typography>
-        </MenuItem>
+        </MenuItem> */}
+        {Object.values(boards.byId).map((board, index) => {
+          return (
+            <MenuItem
+              onClick={(e) => {
+                handleClose()
+              }}
+              key={index}
+            >
+              <ListItemText>{board.title}</ListItemText>
+              <Typography variant="body2" color="#252C32">
+                <BorderColorOutlined />
+              </Typography>
+            </MenuItem>
+          )
+        })}
         <MenuItem
           onClick={(e) => {
             navigate(PATH.TASKINSERT)
