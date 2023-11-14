@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { SiderSectionStyle } from './index.style'
-import { IMAGE } from '../../../../consts'
+import { IMAGE, PATH } from '../../../../consts'
 import { Box, Button } from '@mui/material'
 import {
   AppsOutlined,
@@ -8,6 +8,7 @@ import {
   HomeOutlined,
   InfoOutlined,
 } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
 
 const ButtonComponent: React.FC<{
   buttonId: number
@@ -34,18 +35,19 @@ const ButtonComponent: React.FC<{
 }
 
 export const SiderSection: React.FC = () => {
+  const navigate = useNavigate()
   const [selectedButton, setSelectedButton] = useState<number | null>(1)
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const handleButtonClick = (buttonId: number) => {
+  const handleButtonClick = (buttonId: number, url: string): void => {
     setSelectedButton(selectedButton === buttonId ? null : buttonId)
+    navigate(url)
   }
 
   const buttons = [
-    { id: 1, icon: <AppsOutlined /> },
-    { id: 2, icon: <HomeOutlined /> },
-    { id: 3, icon: <SettingsOutlined /> },
-    { id: 4, icon: <InfoOutlined /> },
+    { id: 1, icon: <AppsOutlined />, url: PATH.DASHBOARD },
+    { id: 2, icon: <HomeOutlined />, url: '' },
+    { id: 3, icon: <SettingsOutlined />, url: '' },
+    { id: 4, icon: <InfoOutlined />, url: '' },
   ]
 
   return (
@@ -58,7 +60,9 @@ export const SiderSection: React.FC = () => {
           key={button.id}
           buttonId={button.id}
           selectedButton={selectedButton}
-          handleButtonClick={handleButtonClick}
+          handleButtonClick={() => {
+            handleButtonClick(button.id, button.url)
+          }}
           icon={button.icon}
         />
       ))}
