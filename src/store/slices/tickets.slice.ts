@@ -13,7 +13,7 @@ const initialState: Ticket = {
       board1: {
         id: 'board1',
         title: 'Board 1',
-        lists: ['list1', 'list2', 'list3'],
+        lists: ['list1', 'list2', 'list3', 'list4', 'list5', 'list6'],
       },
     },
     allIds: ['board1'],

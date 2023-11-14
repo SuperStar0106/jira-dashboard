@@ -31,6 +31,10 @@ export const App: React.FC = () => {
             ></Route>
             <Route path={PATH.SUCCESS} element={<SuccessPage />}></Route>
             <Route path={PATH.DASHBOARD} element={<DashboardPage />}></Route>
+            <Route
+              path={`${PATH.DASHBOARD}/:boardId`}
+              element={<DashboardPage />}
+            ></Route>
             <Route path={PATH.TASKINSERT} element={<TaskInsertPage />}></Route>
             <Route path={PATH.ITEMINSERT} element={<ItemInsertPage />}></Route>
             <Route path="*" element={<Navigate to={PATH.SIGNUP} />}></Route>

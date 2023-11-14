@@ -33,9 +33,9 @@ interface FadeMenuComponentProps {
 }
 
 export const FadeMenuComponent: React.FC<FadeMenuComponentProps> = (props) => {
+  const navigate = useNavigate()
   const { activeButton, setActiveButton } = props
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const navigate = useNavigate()
   const { boards } = useSelector((state: RootState) => state.tickets)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
@@ -85,22 +85,12 @@ export const FadeMenuComponent: React.FC<FadeMenuComponentProps> = (props) => {
           },
         }}
       >
-        {/* <MenuItem
-          onClick={(e) => {
-            handleClose()
-          }}
-          key="1"
-        >
-          <ListItemText>My Tasks</ListItemText>
-          <Typography variant="body2" color="#252C32">
-            <BorderColorOutlined />
-          </Typography>
-        </MenuItem> */}
         {Object.values(boards.byId).map((board, index) => {
           return (
             <MenuItem
               onClick={(e) => {
                 handleClose()
+                navigate(`${PATH.DASHBOARD}/${board.id}`)
               }}
               key={index}
             >

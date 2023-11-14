@@ -3,11 +3,15 @@ import { Box, type BoxProps, Container, Typography } from '@mui/material'
 import { DashboardViewStyle } from './index.style'
 import { WithLayout, TicketListComponent } from '../../common'
 import { DragDropContext } from '@hello-pangea/dnd'
+import { useParams } from 'react-router-dom'
 import {
   type BoardReceive,
   type ListReceive,
   type ItemReceive,
+  // type List,
+  // type Item,
 } from '../../../models'
+import { TicketUtils } from '../../../utils'
 
 type DashboardViewProps = BoxProps & {
   boards: BoardReceive
@@ -24,11 +28,10 @@ const initialTickets: Tickets = {
 }
 
 const DashboardComponent: React.FC<DashboardViewProps> = (props) => {
+  const { boards } = props
+  const { boardId } = useParams()
+  const initialBoardId = boardId ?? ''
   const { lists, items } = props
-
-  useEffect(() => {
-    console.log('items in dashboard: ', Object.values(items.byId))
-  }, [])
 
   const [tickets, setTickets] = useState(initialTickets)
 
@@ -52,6 +55,16 @@ const DashboardComponent: React.FC<DashboardViewProps> = (props) => {
     })
   }
 
+  const listsByBoardId = TicketUtils.getListData(
+    boards.byId[initialBoardId]?.lists ?? [],
+    lists
+  )
+
+  useEffect(() => {
+    console.log('items in dashboard: ', Object.values(items.byId))
+    console.log('Tickets by boardId: ', listsByBoardId)
+  }, [listsByBoardId])
+
   return (
     <DashboardViewStyle>
       <Container maxWidth="xl">
@@ -59,20 +72,20 @@ const DashboardComponent: React.FC<DashboardViewProps> = (props) => {
           <Typography className="url-text">Projects &gt; My Tasks</Typography>
         </Box>
         <Box sx={{ marginTop: '8px' }}>
-          <Typography className="title-text">My Tasks</Typography>
+          <Typography className="title-text">{'asdf'}</Typography>
         </Box>
         <Box sx={{ display: 'flex', gap: '15px' }}>
           <DragDropContext onDragEnd={handleOnDragEnd}>
-            {Object.entries(lists.byId).map(([id, tickets]) => {
+            {Object.entries(listsByBoardId).map(([id, list]) => {
               const filteredItems = Object.values(items.byId).filter((item) =>
-                tickets.items.includes(item.id)
+                list.items.includes(item.id)
               )
 
               return (
                 <Box sx={{ marginTop: '78px' }} key={id}>
                   <TicketListComponent
                     key={id}
-                    progressTitle={tickets.title}
+                    progressTitle={list.title}
                     tickets={filteredItems}
                     droppableId={id}
                   />
