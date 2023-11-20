@@ -1,6 +1,7 @@
 export interface Item {
   id: string
-  content: string
+  title: string
+  content?: string
 }
 
 export interface List {

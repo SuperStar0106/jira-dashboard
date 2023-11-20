@@ -1,5 +1,4 @@
-// import { Board, List, Item } from "../../types";
-import { type Board, type List } from '../../models'
+import { type Board, type List, type Item } from '../../models'
 
 export type GetTicketRequestPayload = undefined
 
@@ -15,6 +14,10 @@ export type AddBoardRequestPayload = Pick<Board, 'title' | 'lists'>
 
 export type AddListRequestPayload = Pick<List, 'title' | 'items'> & {
   boardId: string
+}
+
+export type AddItemRequestPayload = Pick<Item, 'title' | 'content'> & {
+  listId: string
 }
 
 export type GetTicketByBoardIdRequestPayload = Pick<Board, 'title'>

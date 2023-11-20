@@ -1,6 +1,12 @@
 import React from 'react'
 import { ModalComponentStyle } from './index.style'
 import { InputComponent } from '../Input'
+import { InputMultiline } from '../TextArea'
+import * as Yup from 'yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useDispatch } from 'react-redux'
+import { AppActions, type AppDispatch } from '../../../store'
 import {
   Box,
   Button,
@@ -10,17 +16,52 @@ import {
   DialogContentText,
   DialogTitle,
   Typography,
-  TextField,
+  // TextField,
+  // TextareaAutosize,
 } from '@mui/material'
+import { type Item } from '../../../models'
 
 interface ModalComponentProps {
   isOpen: boolean
+  listId?: string
   modalTitle: string
+  type?: string
   handleClose: () => void
 }
 
+const defaultValues: Pick<Item, 'title' | 'content'> = {
+  title: '',
+  content: '',
+}
+
+const schema = Yup.object().shape({
+  title: Yup.string().required(),
+})
+
 export const ModalComponent: React.FC<ModalComponentProps> = (props) => {
-  const { isOpen, modalTitle, handleClose } = props
+  const dispatch = useDispatch<AppDispatch>()
+  const { isOpen, listId, modalTitle, type, handleClose } = props
+  const checkedListId = listId ?? 'list1'
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<Pick<Item, 'title' | 'content'>>({
+    resolver: yupResolver(schema),
+    defaultValues,
+  })
+
+  const onSubmitHandler = (data: Pick<Item, 'title' | 'content'>): void => {
+    const newItem = {
+      title: data.title,
+      content: data.content,
+      listId: checkedListId,
+    }
+    dispatch(AppActions.tickets.addItem(newItem))
+    handleClose()
+    reset()
+  }
 
   return (
     <ModalComponentStyle>
@@ -29,6 +70,7 @@ export const ModalComponent: React.FC<ModalComponentProps> = (props) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        className="dialog"
         sx={{
           '& .MuiDialog-paper': {
             backgroundColor: 'white',
@@ -51,114 +93,100 @@ export const ModalComponent: React.FC<ModalComponentProps> = (props) => {
         }}
       >
         <DialogTitle id="alert-dialog-title">{modalTitle}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <Box sx={{ color: '#252C32' }}>
-              <Typography
+        <form
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
+          onSubmit={handleSubmit(onSubmitHandler)}
+        >
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              {type === 'fromList' && (
+                <Box sx={{ color: '#252C32' }}>
+                  <Typography
+                    sx={{
+                      display: 'flex',
+                      marginLeft: '15px',
+                      marginRight: '15px',
+                      fontFamily: 'Roboto',
+                      fontSize: '13px',
+                      fontWeight: '500',
+                      alignItems: 'flex-end',
+                    }}
+                  >
+                    List&nbsp;<span style={{ color: 'red' }}>*</span>
+                  </Typography>
+                  <InputComponent />
+                </Box>
+              )}
+              <Box sx={{ color: '#252C32', marginTop: '10px' }}>
+                <Typography
+                  sx={{
+                    display: 'flex',
+                    marginLeft: '15px',
+                    marginRight: '15px',
+                    fontFamily: 'Roboto',
+                    fontSize: '13px',
+                    fontWeight: '500',
+                    alignItems: 'flex-end',
+                  }}
+                >
+                  Task Title&nbsp;<span style={{ color: 'red' }}>*</span>
+                </Typography>
+                <InputComponent
+                  name="title"
+                  register={register}
+                  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+                  error={!!errors.title}
+                />
+              </Box>
+              <Box
                 sx={{
-                  display: 'flex',
-                  marginLeft: '15px',
-                  marginRight: '15px',
-                  fontFamily: 'Roboto',
-                  fontSize: '13px',
-                  fontWeight: '500',
-                  alignItems: 'flex-end',
+                  color: '#252C32',
+                  marginTop: '10px',
+                  marginLeft: '10px',
+                  marginRight: '10px',
                 }}
               >
-                Take Title&nbsp;<span style={{ color: 'red' }}>*</span>
-              </Typography>
-              <InputComponent />
-            </Box>
-            <Box sx={{ color: '#252C32', marginTop: '10px' }}>
-              <Typography
-                sx={{
-                  display: 'flex',
-                  marginLeft: '15px',
-                  marginRight: '15px',
-                  fontFamily: 'Roboto',
-                  fontSize: '13px',
-                  fontWeight: '500',
-                  alignItems: 'flex-end',
-                }}
-              >
-                Take Board&nbsp;<span style={{ color: 'red' }}>*</span>
-              </Typography>
-              <InputComponent />
-            </Box>
-            <Box
+                <Typography
+                  sx={{
+                    display: 'flex',
+                    paddingLeft: '5px',
+                    fontFamily: 'Roboto',
+                    fontSize: '13px',
+                    fontWeight: '500',
+                    alignItems: 'flex-end',
+                  }}
+                >
+                  Summary
+                </Typography>
+                <InputMultiline fieldName="content" register={register} />
+              </Box>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+              disabled={!isValid}
+              type="submit"
               sx={{
-                color: '#252C32',
-                marginTop: '10px',
-                marginLeft: '10px',
-                marginRight: '10px',
+                color: 'white',
+                backgroundColor: '#575DFB',
+                fontFamily: 'Roboto',
+                fontSize: '14px',
+                fontWeight: '500',
+                borderRadius: '10px',
+                textTransform: 'none',
+                marginRight: '17px',
+                paddingLeft: '10px',
+                paddingRight: '10px',
+                '&:hover': {
+                  backgroundColor: '#575DFB',
+                },
               }}
             >
-              <Typography
-                sx={{
-                  display: 'flex',
-                  paddingLeft: '5px',
-                  fontFamily: 'Roboto',
-                  fontSize: '13px',
-                  fontWeight: '500',
-                  alignItems: 'flex-end',
-                }}
-              >
-                Summary
-              </Typography>
-              <TextField
-                multiline
-                maxRows={10}
-                sx={{
-                  width: 'calc(100%)',
-                  color: 'red',
-                  fontSize: '13px',
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#E0E3E7',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#B2BAC2',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#6F7E8C',
-                    },
-                    '.css-18ax2bx-MuiInputBase-input-MuiOutlinedInput-input': {
-                      color: '#c5c5c5',
-                    },
-                    '&.MuiInputBase-root': {
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      borderRadius: '10px',
-                      minHeight: '200px',
-                    },
-                  },
-                }}
-              />
-            </Box>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleClose}
-            sx={{
-              color: 'white',
-              backgroundColor: '#575DFB',
-              fontFamily: 'Roboto',
-              fontSize: '14px',
-              fontWeight: '500',
-              borderRadius: '10px',
-              textTransform: 'none',
-              marginRight: '17px',
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              '&:hover': {
-                backgroundColor: '#575DFB',
-              },
-            }}
-          >
-            Create a Task
-          </Button>
-        </DialogActions>
+              Create a Task
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </ModalComponentStyle>
   )

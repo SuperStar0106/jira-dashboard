@@ -57,74 +57,92 @@ const initialState: Ticket = {
     byId: {
       item1: {
         id: 'item1',
+        title: 'title1',
         content: 'Content 1',
       },
       item2: {
         id: 'item2',
+        title: 'title2',
         content: 'Content 2',
       },
       item3: {
         id: 'item3',
+        title: 'title3',
         content: 'Content 3',
       },
       item4: {
         id: 'item4',
+        title: 'title4',
         content: 'Content 4',
       },
       item5: {
         id: 'item5',
+        title: 'title5',
         content: 'Content 5',
       },
       item6: {
         id: 'item6',
+        title: 'title6',
         content: 'Content 6',
       },
       item7: {
         id: 'item7',
+        title: 'title7',
         content: 'Content 7',
       },
       item8: {
         id: 'item8',
+        title: 'title8',
         content: 'Content 8',
       },
       item9: {
         id: 'item9',
+        title: 'title9',
         content: 'Content 9',
       },
       item10: {
         id: 'item10',
+        title: 'title10',
         content: 'Content 10',
       },
       item11: {
         id: 'item11',
+        title: 'title11',
         content: 'Content 11',
       },
       item12: {
         id: 'item12',
+        title: 'title12',
         content: 'Content 12',
       },
       item13: {
         id: 'item13',
+        title: 'title13',
         content: 'Content 13',
       },
       item14: {
         id: 'item14',
+        title: 'title14',
         content: 'Content 14',
       },
       item15: {
         id: 'item15',
+        title: 'title15',
         content: 'Content 15',
       },
       item16: {
         id: 'item16',
+        title: 'title16',
         content: 'Content 16',
       },
       item17: {
         id: 'item17',
+        title: 'title17',
         content: 'Content 17',
       },
       item18: {
         id: 'item18',
+        title: 'title18',
         content: 'Content 18',
       },
     },
@@ -232,6 +250,26 @@ const ticketsSlice = createSlice({
           },
         },
       }
+    },
+    addItem(
+      state: Ticket,
+      action: PayloadAction<Tickets.AddItemRequestPayload>
+    ) {
+      const { content, title, listId } = action.payload
+
+      const newItemId = `item${state.items.allIds.length + 1}`
+
+      const newItem = {
+        id: newItemId,
+        title,
+        content,
+      }
+
+      console.log('title in slice: ', title)
+
+      state.items.byId[newItemId] = newItem
+      state.items.allIds.push(newItemId)
+      state.lists.byId[listId].items.push(newItemId)
     },
   },
 })

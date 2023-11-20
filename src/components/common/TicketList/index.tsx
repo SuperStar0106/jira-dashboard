@@ -17,6 +17,7 @@ import { AddOutlined, FiberManualRecord } from '@mui/icons-material'
 import ticketImg from '../../../assets/images/dashboard/ticket_imgs/img1.jpg'
 interface TicketListComponentProps {
   progressTitle: string
+  progressId: string
   tickets: Item[]
   droppableId: string
 }
@@ -24,7 +25,7 @@ interface TicketListComponentProps {
 interface TicketComponentProps {
   index: number
   ticketTitle: string
-  ticketContent: string
+  ticketContent?: string
 }
 
 export const TicketComponent: React.FC<TicketComponentProps> = ({
@@ -90,11 +91,10 @@ export const TicketComponent: React.FC<TicketComponentProps> = ({
   )
 }
 
-export const TicketListComponent: React.FC<TicketListComponentProps> = ({
-  progressTitle,
-  tickets,
-  droppableId,
-}) => {
+export const TicketListComponent: React.FC<TicketListComponentProps> = (
+  props
+) => {
+  const { progressId, progressTitle, tickets, droppableId } = props
   const [open, setOpen] = useState<boolean>(false)
 
   const handleClickOpen = (): void => {
@@ -126,6 +126,7 @@ export const TicketListComponent: React.FC<TicketListComponentProps> = ({
         </Card>
         <ModalComponent
           isOpen={open}
+          listId={progressId}
           modalTitle="Task"
           handleClose={handleClose}
         />
@@ -141,7 +142,7 @@ export const TicketListComponent: React.FC<TicketListComponentProps> = ({
               <TicketComponent
                 index={index}
                 key={index}
-                ticketTitle={ticket.content}
+                ticketTitle={ticket.title}
                 ticketContent={ticket.content}
               />
             ))}

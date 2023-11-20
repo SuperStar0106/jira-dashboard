@@ -69,10 +69,14 @@ const DashboardComponent: React.FC<DashboardViewProps> = (props) => {
     <DashboardViewStyle>
       <Container maxWidth="xl">
         <Box>
-          <Typography className="url-text">Projects &gt; My Tasks</Typography>
+          <Typography className="url-text">
+            Projects &gt; {boards.byId[initialBoardId]?.title ?? ''}
+          </Typography>
         </Box>
         <Box sx={{ marginTop: '8px' }}>
-          <Typography className="title-text">{'asdf'}</Typography>
+          <Typography className="title-text">
+            {boards.byId[initialBoardId]?.title ?? ''}
+          </Typography>
         </Box>
         <Box sx={{ display: 'flex', gap: '15px' }}>
           <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -85,6 +89,7 @@ const DashboardComponent: React.FC<DashboardViewProps> = (props) => {
                 <Box sx={{ marginTop: '78px' }} key={id}>
                   <TicketListComponent
                     key={id}
+                    progressId={list.id}
                     progressTitle={list.title}
                     tickets={filteredItems}
                     droppableId={id}

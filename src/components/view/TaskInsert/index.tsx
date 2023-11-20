@@ -42,8 +42,6 @@ const TaskInsertComponent: React.FC<TaskInsertViewProps> = (props) => {
     handleSubmit,
     watch,
     formState: { errors, isValid },
-    // setValue,
-    // getValues,
     reset,
   } = useForm<Pick<Board, 'title'>>({
     resolver: yupResolver(schema),

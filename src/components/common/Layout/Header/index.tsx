@@ -16,6 +16,7 @@ import {
 } from '@mui/material'
 import { ButtonComponent } from '../../Button'
 import { InputComponent } from '../../Input'
+import { ModalComponent } from '../../Modal'
 import {
   ExpandMoreOutlined,
   NotesOutlined,
@@ -116,7 +117,16 @@ export const FadeMenuComponent: React.FC<FadeMenuComponentProps> = (props) => {
 
 export const HeaderSection: React.FC = () => {
   const [activeButton, setActiveButton] = useState<string>('')
-  const navigate = useNavigate()
+
+  const [open, setOpen] = useState<boolean>(false)
+
+  const handleClickOpen = (): void => {
+    setOpen(true)
+  }
+
+  const handleClose = (): void => {
+    setOpen(false)
+  }
 
   return (
     <HeaderSectionStyle>
@@ -173,13 +183,17 @@ export const HeaderSection: React.FC = () => {
           <ButtonComponent
             type="submit"
             className="create_btn"
-            onClick={() => {
-              navigate(PATH.TASKINSERT)
-            }}
+            onClick={handleClickOpen}
           >
             + Create New Task
           </ButtonComponent>
         </Box>
+        <ModalComponent
+          isOpen={open}
+          type="fromList"
+          modalTitle="Task"
+          handleClose={handleClose}
+        />
         <Box className="justify-content-center">
           <Badge badgeContent={12} color="primary" className="badge">
             <Notifications
